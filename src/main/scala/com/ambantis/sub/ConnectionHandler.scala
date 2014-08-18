@@ -217,7 +217,7 @@ private[sub] class Endpoint(path: ActorPath) extends Actor with ActorLogging {
   var messages = List.empty[Any]
   val shouldWatch: Boolean =
     try { system.settings.config.getBoolean("app.watch") } catch {
-    case e: Throwable => log.error(s"${self.path} unable to load Bonjour endpoints from path `app.watch`", e); false }
+    case e: Throwable => log.error(s"${self.path} unable to load watch flag from config", e); false }
 
   def delay: FiniteDuration = {
     val _delay = baseDelay * attempts * attempts
