@@ -196,8 +196,8 @@ private[sub] class Endpoint(path: ActorPath) extends Actor with ActorLogging {
   import context._
 
   val passCode: Long = System.nanoTime() - this.hashCode()
-  val delayConfigPath = "jobStreams.jobmanager.delayInMillis"
-  val maxDelayConfigPath = "jobStreams.jobmanager.maxDelayInMinutes"
+  val delayConfigPath = "app.delayInMillis"
+  val maxDelayConfigPath = "app.maxDelayInMinutes"
   val logMsgPrefix = s"actor ${self.path}, the guardian of ActorPath $path"
   lazy val baseDelay: FiniteDuration =
     try { system.settings.config.getLong(delayConfigPath).millis }
