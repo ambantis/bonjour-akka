@@ -30,9 +30,9 @@ trait BonjourConnectionSupport { this: Actor with ActorLogging =>
   }
 
   /**
-   * Indicates whether it is possible to attempt a connection to one or more JDLink dispatcher(s)
+   * Indicates whether it is possible to attempt a connection to one or more Bonjour instances
    *
-   * @return true if calling the method `startMsgForDispatcherJDLink` will create a StartConnection message with ActorPaths
+   * @return true if calling the method `startMsgForBonjour` will create a StartConnection message with ActorPaths
    */
   def existsBonjourEndpoints: Boolean = endpoints.nonEmpty
 
@@ -40,7 +40,7 @@ trait BonjourConnectionSupport { this: Actor with ActorLogging =>
    * Helper method to construct a subscribe message for JDLink dispatchers
    *
    * @param subscriber the ActorRef that should be subscribed to the JDLink dispatcher(s)
-   * @return `StartConnection` object that can be sent to a ConnectionHandler to initiate a subscription to JDLink dispatcher(s)
+   * @return `StartConnection` object that can be sent to a ConnectionHandler to initiate a subscription to a Bonjour instance
    */
   def startMsgForBonjour(subscriber: ActorRef) = {
     val msg = Subscribe(subscriber, List(classOf[Announcement]))
@@ -48,10 +48,10 @@ trait BonjourConnectionSupport { this: Actor with ActorLogging =>
   }
 
   /**
-   * A Helper method to construct an `UnSubscribe` message for JDLink dispatcher(s)
+   * A Helper method to construct an `UnSubscribe` message for a Bonjour instance
    *
-   * @param subscriber the ActorRef that should be unsubscribed from the JDLink dispatcher(s)
-   * @return `StopConnection` object that can be sent to a ConnectionHandler to end a subscription to JDLink dispatcher(s)
+   * @param subscriber the ActorRef that should be unsubscribed from the Bonjour
+   * @return `StopConnection` object that can be sent to a ConnectionHandler to end a subscription to the Bonjour instance
    */
   def stopMsgForBonjour(subscriber: ActorRef) = {
     val msg = Unsubscribe(subscriber, List(classOf[Announcement]))
