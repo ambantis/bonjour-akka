@@ -1,3 +1,6 @@
+import com.typesafe.sbt.SbtNativePackager._
+import NativePackagerKeys._
+
 organization := "com.ambantis"
 
 name := "hello"
@@ -20,10 +23,13 @@ libraryDependencies := {
   val akkaVersion = "2.3.5"
   val scalatestVersion = "2.2.1"
   Seq(
-    "com.typesafe.akka" %% "akka-actor"   % akkaVersion,
-    "com.typesafe.akka" %% "akka-remote"  % akkaVersion,
-    "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test",
-    "org.scalatest"     %% "scalatest"    % scalatestVersion % "test"
+    "com.typesafe.akka" %% "akka-actor"      % akkaVersion,
+    "com.typesafe.akka" %% "akka-remote"     % akkaVersion,
+    "com.typesafe.akka" %% "akka-slf4j"      % akkaVersion,
+    "com.typesafe.akka" %% "akka-kernel"     % akkaVersion,
+    "com.typesafe.akka" %% "akka-testkit"    % akkaVersion % "test",
+    "org.scalatest"     %% "scalatest"       % scalatestVersion % "test",
+    "ch.qos.logback"    % "logback-classic" % "1.0.13"
   )
 }
 
@@ -33,5 +39,6 @@ ideaExcludeFolders ++= Seq(
   ".idea",
   ".idea_modules"
 )
-  
+
+packageArchetype.java_application
 
